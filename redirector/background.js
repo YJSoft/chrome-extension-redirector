@@ -8,7 +8,7 @@ chrome.webRequest.onBeforeRequest.addListener(
         indexphp = "^http:\/\/f-planet\.co\.kr\/index\.php(.*)";
         middocumentsrl_from = "^http:\/\/f-planet\.co\.kr\/([^\/]+)\/([^\/]+)";
         middocumentsrl_to = "http://f-planet.co.kr/index.php?mid=$1&document_srl=$2";
-        mid_from = "^http:\/\/f-planet\.co\.kr\/([^\/]+)";
+        mid_from = "^http:\/\/f-planet\.co\.kr\/([^\/]+)(\/?)";
         mid_to = "http://f-planet.co.kr/index.php?mid=$1";
         xefolder = "(addons|admin|classes|common|config|layouts|libs|m.layouts|modules|phpDoc|tests|tools|widgets|widgetstyles)";
 
