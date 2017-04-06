@@ -1,8 +1,6 @@
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         var pattern,indexphp, middocumentsrl_from, middocumentsrl_to, mid_from, mid_to, redirectUrl, match, xefolder;
-
-        console.log(details);
         
         //setting regex
         indexphp = "^http:\/\/f-planet\.co\.kr\/index\.php(.*)";
