@@ -85,10 +85,3 @@ function addToTable(id, from, to) {
   $row.find('button.remove').on('click', remove);
   $row.appendTo($('#redirects table tbody'));
 }
-
-
-$(document).ready(function(){
-  $('#add').on('click', add);
-  $('#alert').alert();
-  storageUpdate();
-});
