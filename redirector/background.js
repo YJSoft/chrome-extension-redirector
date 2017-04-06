@@ -1,14 +1,14 @@
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         var pattern,indexphp, middocumentsrl_from, middocumentsrl_to, mid_from, mid_to, redirectUrl, match, xefolder;
-        
+
         //setting regex
         indexphp = "^http:\/\/f-planet\.co\.kr\/index\.php(.*)";
         middocumentsrl_from = "^http:\/\/f-planet\.co\.kr\/([^\/]+)\/([^\/]+)";
         middocumentsrl_to = "http://f-planet.co.kr/index.php?mid=$1&document_srl=$2";
         mid_from = "^http:\/\/f-planet\.co\.kr\/([^\/]+)(\/?)";
         mid_to = "http://f-planet.co.kr/index.php?mid=$1";
-        xefolder = "(addons|admin|classes|common|config|layouts|libs|m.layouts|modules|phpDoc|tests|tools|widgets|widgetstyles)";
+        xefolder = "^http:\/\/f-planet\.co\.kr\/(addons|admin|classes|common|config|layouts|libs|m.layouts|modules|phpDoc|tests|tools|widgets|widgetstyles){1}(.*)";
 
         // compile regex
         indexphp = new RegExp(indexphp, 'ig');
@@ -23,15 +23,16 @@ chrome.webRequest.onBeforeRequest.addListener(
             return {};
         }
 
+        // if url is xe folder
+        match = details.url.match(xefolder);
+        if (match) {
+            //continue
+            return {};
+        }
+
         //if url format is mid/document_srl
         match = details.url.match(middocumentsrl_from);
         if (match) {
-            //if xe common folder url, continue
-            if(typeof match[1] != "undefined" && match[1].match(xefolder)) {
-                return {};
-            }
-
-            //else, redirect
             redirectUrl = details.url.replace(middocumentsrl_from, middocumentsrl_to);
             if (redirectUrl != details.url) {
                 return {redirectUrl: redirectUrl};
