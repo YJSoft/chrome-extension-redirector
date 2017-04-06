@@ -29,7 +29,7 @@ chrome.webRequest.onBeforeRequest.addListener(
         match = details.url.match(middocumentsrl_from);
         if (match) {
             //if xe common folder url, continue
-            if(match[1].match(xefolder)) {
+            if(typeof match[1] != "undefined" && match[1].match(xefolder)) {
                 return {};
             }
 
